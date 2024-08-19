@@ -2,10 +2,22 @@ package com.ulanzhasssanov.CrudAppWithHibernate.model;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.enums.Status;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "labels")
 public class Label {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "status")
     private Status status;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     public Label() {
     }
@@ -19,6 +31,13 @@ public class Label {
         this.id = id;
         this.name = name;
         this.status = status;
+    }
+
+    public Label(int id, String name, Status status, List<Post> posts) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.posts = posts;
     }
 
     public int getId() {
@@ -43,6 +62,14 @@ public class Label {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override

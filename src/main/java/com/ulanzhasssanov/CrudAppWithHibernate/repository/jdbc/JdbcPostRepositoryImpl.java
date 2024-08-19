@@ -1,9 +1,10 @@
-package com.ulanzhasssanov.CrudAppWithHibernate.repository;
+package com.ulanzhasssanov.CrudAppWithHibernate.repository.jdbc;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.enums.Status;
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Label;
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Post;
 import com.ulanzhasssanov.CrudAppWithHibernate.enums.PostStatus;
+import com.ulanzhasssanov.CrudAppWithHibernate.repository.PostRepository;
 
 import java.sql.*;
 import java.time.Instant;
@@ -17,12 +18,12 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             "JOIN labels l on pl.labelId = l.id " +
             "WHERE pl.postId = ?";
     private static final String GET_ALL_POSTS = "SELECT * FROM posts WHERE status='ACTIVE'";
-    private static final String SAVE_POST = "INSERT INTO posts (content, created, updated, writerId, status) VALUES (?, ?, ?, ?, ?)";
+    private static final String SAVE_POST = "INSERT INTO posts (content, created, updated, writer_id, status) VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE_POST = "UPDATE posts SET content = ?, updated = ? WHERE id = ?";
     private static final String DELETE_POST = "UPDATE posts SET status = ? WHERE id = ?";
     private static final String SAVE_POST_LABEL = "INSERT INTO post_label (postId, labelId) VALUES (?, ?)";
     private static final String DELETE_POST_LABEL_BY_POST_ID = "DELETE FROM post_label WHERE postId = ?";
-    private static final String GET_POST_BY_WRITER_ID = "SELECT * FROM posts WHERE writerId = ? AND status='ACTIVE'";
+    private static final String GET_POST_BY_WRITER_ID = "SELECT * FROM posts WHERE writer_id = ? AND status='ACTIVE'";
 
 
     @Override
@@ -37,9 +38,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 post = new Post();
                 post.setId(resultSet.getInt("id"));
                 post.setContent(resultSet.getString("content"));
-                post.setCreated(resultSet.getString("created"));
-                post.setUpdated(resultSet.getString("updated"));
-                post.setWriterId(resultSet.getInt("writerId"));
+                post.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
+                post.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                post.setWriterId(resultSet.getInt("writer_id"));
                 post.setStatus(PostStatus.ACTIVE);
 
                 List<Label> labels = getLabelsByPostId(id);
@@ -86,9 +87,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 Post post = new Post();
                 post.setId(resultSet.getInt("id"));
                 post.setContent(resultSet.getString("content"));
-                post.setCreated(resultSet.getString("created"));
-                post.setUpdated(resultSet.getString("updated"));
-                post.setWriterId(resultSet.getInt("writerId"));
+                post.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
+                post.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                post.setWriterId(resultSet.getInt("writer_id"));
                 post.setStatus(PostStatus.ACTIVE);
 
                 List<Label> labels = getLabelsByPostId(post.getId());
@@ -203,9 +204,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 Post post = new Post();
                 post.setId(resultSet.getInt("id"));
                 post.setContent(resultSet.getString("content"));
-                post.setCreated(resultSet.getString("created"));
-                post.setUpdated(resultSet.getString("updated"));
-                post.setWriterId(resultSet.getInt("writerId"));
+                post.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
+                post.setUpdated(resultSet.getTimestamp("updated").toLocalDateTime());
+                post.setWriterId(resultSet.getInt("writer_id"));
                 post.setStatus(PostStatus.ACTIVE);
 
                 List<Label> labels = getLabelsByPostId(post.getId());

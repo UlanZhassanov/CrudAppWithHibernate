@@ -1,13 +1,13 @@
 package com.ulanzhasssanov.CrudAppWithHibernate.controller;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Label;
-import com.ulanzhasssanov.CrudAppWithHibernate.repository.JdbcLabelRepositoryImpl;
+import com.ulanzhasssanov.CrudAppWithHibernate.repository.hibernate.HibernateLabelRepositoryImpl;
 import com.ulanzhasssanov.CrudAppWithHibernate.service.LabelService;
 
 import java.util.List;
 
 public class LabelController {
-    private LabelService labelService = new LabelService(new JdbcLabelRepositoryImpl());
+    private LabelService labelService = new LabelService(new HibernateLabelRepositoryImpl());
 
     public Label saveLabel(Label label){
         return labelService.saveLabel(label);

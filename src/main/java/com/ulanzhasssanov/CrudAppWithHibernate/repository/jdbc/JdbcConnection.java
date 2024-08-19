@@ -1,4 +1,4 @@
-package com.ulanzhasssanov.CrudAppWithHibernate.repository;
+package com.ulanzhasssanov.CrudAppWithHibernate.repository.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

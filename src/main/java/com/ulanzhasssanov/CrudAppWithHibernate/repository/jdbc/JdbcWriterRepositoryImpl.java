@@ -1,8 +1,9 @@
-package com.ulanzhasssanov.CrudAppWithHibernate.repository;
+package com.ulanzhasssanov.CrudAppWithHibernate.repository.jdbc;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.enums.Status;
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Post;
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Writer;
+import com.ulanzhasssanov.CrudAppWithHibernate.repository.WriterRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

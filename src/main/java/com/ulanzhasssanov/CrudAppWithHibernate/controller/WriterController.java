@@ -1,13 +1,13 @@
 package com.ulanzhasssanov.CrudAppWithHibernate.controller;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Writer;
-import com.ulanzhasssanov.CrudAppWithHibernate.repository.JdbcWriterRepositoryImpl;
+import com.ulanzhasssanov.CrudAppWithHibernate.repository.hibernate.HibernateWriterRepositoryImpl;
 import com.ulanzhasssanov.CrudAppWithHibernate.service.WriterService;
 
 import java.util.List;
 
 public class WriterController {
-    private WriterService writerService = new WriterService(new JdbcWriterRepositoryImpl());
+    private WriterService writerService = new WriterService(new HibernateWriterRepositoryImpl());
 
     public Writer saveWriter(Writer writer){
         return writerService.saveWriter(writer);

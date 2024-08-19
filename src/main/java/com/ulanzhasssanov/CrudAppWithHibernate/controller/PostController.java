@@ -1,13 +1,13 @@
 package com.ulanzhasssanov.CrudAppWithHibernate.controller;
 
 import com.ulanzhasssanov.CrudAppWithHibernate.model.Post;
-import com.ulanzhasssanov.CrudAppWithHibernate.repository.JdbcPostRepositoryImpl;
+import com.ulanzhasssanov.CrudAppWithHibernate.repository.hibernate.HibernatePostRepositoryImpl;
 import com.ulanzhasssanov.CrudAppWithHibernate.service.PostService;
 
 import java.util.List;
 
 public class PostController {
-    private PostService postService = new PostService(new JdbcPostRepositoryImpl());
+    private PostService postService = new PostService(new HibernatePostRepositoryImpl());
 
     public Post savePost(Post post){
         return postService.savePost(post);

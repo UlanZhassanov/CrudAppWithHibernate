@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,14 +34,14 @@ class PostServiceTest {
     private PostService postService;
 
     private List<Label> labels;
-    private Timestamp currentTimestamp;
+    private LocalDateTime localDateTime;
     private Post mockPost;
 
     @BeforeEach
     void setUp() {
         labels = new ArrayList<>();
-        currentTimestamp = Timestamp.from(Instant.now());
-        mockPost = new Post(1, "Test Content", currentTimestamp.toString(), currentTimestamp.toString(), labels, 1, PostStatus.ACTIVE);
+        localDateTime = LocalDateTime.now();
+        mockPost = new Post(1, "Test Content", localDateTime, localDateTime, labels, 1, PostStatus.ACTIVE);
     }
 
     @Test
@@ -55,8 +56,8 @@ class PostServiceTest {
 
     @Test
     void testGetAllPosts() {
-        Post post1 = new Post(1, "Test Content", currentTimestamp.toString(), currentTimestamp.toString(), labels, 1, PostStatus.ACTIVE);
-        Post post2 = new Post(1, "Test Content", currentTimestamp.toString(), currentTimestamp.toString(), labels, 1, PostStatus.ACTIVE);
+        Post post1 = new Post(1, "Test Content", localDateTime, localDateTime, labels, 1, PostStatus.ACTIVE);
+        Post post2 = new Post(1, "Test Content", localDateTime, localDateTime, labels, 1, PostStatus.ACTIVE);
         List<Post> mockPosts = Arrays.asList(post1, post2);
 
         when(postRepository.getAll()).thenReturn(mockPosts);

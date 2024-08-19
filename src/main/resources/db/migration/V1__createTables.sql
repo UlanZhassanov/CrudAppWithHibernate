@@ -1,0 +1,44 @@
+CREATE TABLE labels (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) DEFAULT NULL,
+  status VARCHAR(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE writers (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  firstname VARCHAR(50) DEFAULT NULL,
+  lastname VARCHAR(50) DEFAULT NULL,
+  status VARCHAR(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE posts (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  content VARCHAR(50) DEFAULT NULL,
+  created TIMESTAMP NULL DEFAULT NULL,
+  updated TIMESTAMP NULL DEFAULT NULL,
+  writer_id BIGINT(20) NOT NULL,
+  status VARCHAR(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE posts
+  ADD CONSTRAINT fk_writer_post FOREIGN KEY (writer_id)
+    REFERENCES writers(id);
+
+CREATE TABLE post_label (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  post_id BIGINT(20) NOT NULL,
+  label_id BIGINT(20) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
+ALTER TABLE post_label
+  ADD CONSTRAINT fk_post_label_label FOREIGN KEY (label_id)
+    REFERENCES labels(id);
+
+ALTER TABLE post_label
+  ADD CONSTRAINT fk_post_label_post FOREIGN KEY (post_id)
+    REFERENCES posts(id);
