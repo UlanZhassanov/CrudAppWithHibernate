@@ -20,7 +20,7 @@ public class HibernateWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public List<Writer> getAll() {
-        return entityManager.createQuery("FROM Writer", Writer.class).getResultList();
+        return entityManager.createQuery("FROM Writer WHERE status <> 'DELETED'", Writer.class).getResultList();
     }
 
     @Override

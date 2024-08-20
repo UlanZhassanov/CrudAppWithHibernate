@@ -28,7 +28,7 @@ public class HibernatePostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> getAll() {
-        return entityManager.createQuery("FROM Post", Post.class).getResultList();
+        return entityManager.createQuery("FROM Post WHERE status <> 'DELETED'", Post.class).getResultList();
     }
 
     @Override

@@ -23,7 +23,7 @@ public class HibernateLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public List<Label> getAll() {
-        return entityManager. createQuery("FROM Label", Label.class).getResultList();
+        return entityManager. createQuery("FROM Label WHERE status <> 'DELETED'", Label.class).getResultList();
     }
 
     @Override

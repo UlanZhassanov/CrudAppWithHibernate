@@ -14,6 +14,7 @@ public class Label {
     private int id;
     @Column(name = "name")
     private String name;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels", cascade = CascadeType.ALL)

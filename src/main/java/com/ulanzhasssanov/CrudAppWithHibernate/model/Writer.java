@@ -20,6 +20,7 @@ public class Writer {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "writer_id")
     private List<Post> posts;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 

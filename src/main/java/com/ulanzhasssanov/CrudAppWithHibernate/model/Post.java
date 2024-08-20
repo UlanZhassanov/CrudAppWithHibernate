@@ -29,6 +29,7 @@ public class Post {
     private List<Label> labels;
     @Column(name = "writer_id")
     private Integer writerId;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private PostStatus status;
 
